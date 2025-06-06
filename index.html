@@ -2,14 +2,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>订单系统演示</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>企业下单平台</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>在线下单演示</h1>
+        <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-shop-ecommerce-flatart-icons-outline-flatarticons.png" alt="logo" style="display:block;margin:0 auto 20px auto;">
+        <h1 style="text-align: center;">企业小店下单平台</h1>
+        <p style="text-align: center; margin-top: -10px;">
+            <a href="https://t.me/kefu832" target="_blank" style="color: #007BFF; text-decoration: none; font-weight: bold;">
+                💬 联系客服 Telegram：@kefu832
+            </a>
+        </p>
         <form id="orderForm">
             <label for="category">商品分类：</label>
             <select id="category" name="category">
@@ -40,8 +46,12 @@
             <p class="total">总价：<span id="total">10</span> 元</p>
             <button type="submit">提交订单</button>
         </form>
-    </div>
 
+        <div style="margin-top: 30px; background: #fffbe6; padding: 12px; border: 1px solid #ffe58f; border-radius: 6px;">
+            <strong>⚠️ 支付说明：</strong><br>
+            目前仅支持 USDT 支付，提交订单后请联系客服完成支付。
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
