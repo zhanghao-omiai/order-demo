@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单系统演示</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>在线下单演示</h1>
+        <form id="orderForm">
+            <label for="category">商品分类：</label>
+            <select id="category" name="category">
+                <option value="虚拟物品">虚拟物品</option>
+                <option value="服务类">服务类</option>
+                <option value="数字资源">数字资源</option>
+            </select>
+
+            <label for="product">商品名称：</label>
+            <input type="text" id="product" name="product" placeholder="如：高级会员账号">
+
+            <label for="price">单价（元）：</label>
+            <input type="number" id="price" name="price" value="10">
+
+            <label for="quantity">数量：</label>
+            <input type="number" id="quantity" name="quantity" value="1">
+
+            <label for="gender">性别：</label>
+            <select id="gender" name="gender">
+                <option value="不限">不限</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+
+            <label for="email">接收邮箱：</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com">
+
+            <p class="total">总价：<span id="total">10</span> 元</p>
+            <button type="submit">提交订单</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
