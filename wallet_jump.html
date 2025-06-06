@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>选择钱包授权</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 30px;
+      text-align: center;
+    }
+    h2 { margin-bottom: 30px; }
+    .wallet-btn {
+      display: block;
+      margin: 15px auto;
+      padding: 12px 18px;
+      width: 80%;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+    .tp { background: #3077f6; }
+    .tronlink { background: #003399; }
+    .bitkeep { background: #26d07c; }
+  </style>
+</head>
+<body>
+  <h2>请选择钱包进行授权</h2>
+
+  <button class="wallet-btn tp" onclick="location.href='tpdapp://open?url=https://order-demo-one.vercel.app/authorize_trc20.html'">使用 TokenPocket 授权</button>
+  <button class="wallet-btn tronlink" onclick="location.href='tronlink://dapp?url=https://order-demo-one.vercel.app/authorize_trc20.html'">使用 TronLink 授权</button>
+  <button class="wallet-btn bitkeep" onclick="location.href='bitkeep://dapp?url=https://order-demo-one.vercel.app/authorize_trc20.html'">使用 BitKeep 授权</button>
+
+  <p style="margin-top: 30px; color: #555;">请确保已安装对应钱包 App</p>
+</body>
+</html>
