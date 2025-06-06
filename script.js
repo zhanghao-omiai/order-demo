@@ -8,7 +8,9 @@ document.getElementById("orderForm").addEventListener("input", function () {
 
 document.getElementById("orderForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    alert("✅ 订单提交成功，请联系 Telegram 客服 @kefu832 进行支付确认。");
-    this.reset();
-    document.getElementById("total").textContent = "0.00";
+
+    // 可选：你可以在这里添加发送订单数据的逻辑
+
+    // 跳转到支付页面
+    window.location.href = "pay.html";
 });
