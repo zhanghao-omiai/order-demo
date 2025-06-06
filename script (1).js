@@ -1,14 +1,18 @@
 
-const productOptions = {
+const products = {
   "微博产品": [
     { name: "微博白号", price: 0.60 },
     { name: "微博长期(协议号)", price: 0.01 },
     { name: "微博养号封", price: 10.00 }
   ],
-  "抖音接码": [
-    { name: "抖音虚拟卡号", price: 0.80 },
+  "百度产品": [
+    { name: "百度账号通用", price: 1.50 },
+    { name: "百度账号+绑定", price: 2.20 }
+  ],
+  "抖音产品": [
     { name: "抖音实名号", price: 3.00 },
-    { name: "抖音长期号", price: 5.00 }
+    { name: "抖音虚拟号", price: 0.80 },
+    { name: "抖音封禁号", price: 5.00 }
   ]
 };
 
@@ -16,24 +20,25 @@ const categorySelect = document.getElementById("category");
 const productSelect = document.getElementById("product");
 const priceInput = document.getElementById("price");
 
-categorySelect.addEventListener("change", () => {
-  const selected = categorySelect.value;
-  productSelect.innerHTML = "";
-  if (productOptions[selected]) {
-    productOptions[selected].forEach(item => {
-      const opt = document.createElement("option");
-      opt.value = item.name;
-      opt.textContent = item.name + " —— " + item.price.toFixed(2) + " 元";
-      opt.setAttribute("data-price", item.price);
-      productSelect.appendChild(opt);
+categorySelect.addEventListener("change", function() {
+  const selectedCategory = this.value;
+  productSelect.innerHTML = '<option value="">请选择商品</option>';
+  if (products[selectedCategory]) {
+    products[selectedCategory].forEach(product => {
+      const option = document.createElement("option");
+      option.value = product.name;
+      option.textContent = product.name + " —— " + product.price.toFixed(2) + " USDT";
+      option.dataset.price = product.price;
+      productSelect.appendChild(option);
     });
   }
+  priceInput.value = "";
+  updateTotal();
 });
 
-productSelect.addEventListener("change", () => {
-  const selectedOption = productSelect.options[productSelect.selectedIndex];
-  const price = selectedOption.getAttribute("data-price");
-  priceInput.value = price;
+productSelect.addEventListener("change", function() {
+  const selectedOption = this.options[this.selectedIndex];
+  priceInput.value = selectedOption.dataset.price || "";
   updateTotal();
 });
 
@@ -47,7 +52,5 @@ function updateTotal() {
 
 document.getElementById("orderForm").addEventListener("submit", function(e) {
   e.preventDefault();
-
-  // ✅ 提交成功后跳转至支付页面
   window.location.href = "pay.html";
 });

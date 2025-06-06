@@ -4,45 +4,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>企业小店下单平台</title>
-  <link rel="stylesheet" href="style.css">
+  <title>商品下单平台</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1 style="text-align: center; font-size: 24px;">企业小店下单平台</h1>
-    <p style="text-align: center;">
-      💬 联系客服 Telegram：<a href="https://t.me/kefu832" target="_blank">@kefu832</a>
-    </p>
-
+    <h1 style="text-align:center;">企业小店下单平台</h1>
     <form id="orderForm">
       <label for="category">商品分类：</label>
       <select id="category" name="category">
+        <option value="">请选择分类</option>
         <option value="微博产品">微博产品</option>
-        <option value="抖音接码">抖音接码</option>
+        <option value="百度产品">百度产品</option>
+        <option value="抖音产品">抖音产品</option>
       </select>
 
       <label for="product">商品名称：</label>
       <select id="product" name="product">
-        <option value="">请选择分类</option>
+        <option value="">请选择商品</option>
       </select>
 
-      <label for="price">单价（元）：</label>
-      <input type="number" id="price" name="price" readonly>
+      <label for="price">单价（USDT）：</label>
+      <input type="text" id="price" name="price" readonly>
 
       <label for="quantity">数量：</label>
-      <input type="number" id="quantity" name="quantity" value="1">
-
-      <label for="gender">性别：</label>
-      <select id="gender" name="gender">
-        <option value="不限">不限</option>
-        <option value="男">男</option>
-        <option value="女">女</option>
-      </select>
+      <input type="number" id="quantity" name="quantity" value="1" />
 
       <label for="email">接收邮箱：</label>
-      <input type="email" id="email" name="email" placeholder="example@email.com">
+      <input type="email" id="email" name="email" placeholder="example@email.com"/>
 
-      <p class="total">总价：<span id="total">0.00</span> 元</p>
+      <p class="total">总价：<span id="total">0.00</span> USDT</p>
       <button type="submit">提交订单</button>
     </form>
   </div>
