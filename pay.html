@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>支付页面</title>
+    <title>USDT 支付页面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style>
         body {
@@ -20,16 +20,15 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             text-align: center;
         }
-        .qr-group {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .qr-group img {
-            width: 100px;
-            height: 100px;
+        .qr-block img {
+            width: 140px;
+            height: 140px;
             border: 1px solid #ddd;
             border-radius: 6px;
+        }
+        .qr-block h3 {
+            margin-top: 10px;
+            font-size: 18px;
         }
         .pay-note {
             margin-top: 20px;
@@ -47,29 +46,24 @@
             padding: 10px 16px;
             border-radius: 6px;
         }
+        .usdt-icon {
+            width: 32px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>请完成支付</h2>
-        <p>请使用以下任意方式完成支付后联系在线客服</p>
-        <div class="qr-group">
-            <div>
-                <p>微信</p>
-                <img src="https://via.placeholder.com/100x100.png?text=WeChat" alt="微信二维码">
-            </div>
-            <div>
-                <p>支付宝</p>
-                <img src="https://via.placeholder.com/100x100.png?text=Alipay" alt="支付宝二维码">
-            </div>
-            <div>
-                <p>USDT</p>
-                <img src="https://via.placeholder.com/100x100.png?text=USDT" alt="USDT二维码">
-            </div>
+        <h2><img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="usdt-icon" alt="USDT">USDT 支付</h2>
+        <p>请使用 USDT 转账以下地址完成支付：</p>
+        <div class="qr-block">
+            <img src="https://via.placeholder.com/140x140.png?text=USDT" alt="USDT二维码">
+            <h3>收款地址二维码</h3>
         </div>
         <div class="pay-note">
-            <strong>⚠️ 注意：</strong><br>
-            支付完成后请发送截图至 Telegram 客服进行确认处理。
+            <strong>⚠️ 温馨提示：</strong><br>
+            请在提交订单金额后立即转账至上方地址，并截图发送给客服。
         </div>
         <a class="btn" href="https://t.me/kefu832" target="_blank">💬 联系 Telegram 客服</a>
     </div>
