@@ -47,8 +47,7 @@ function updateTotal() {
 
 document.getElementById("orderForm").addEventListener("submit", function(e) {
   e.preventDefault();
-  alert("✅ 订单提交成功，请联系 Telegram 客服 @kefu832 进行支付确认。");
-  this.reset();
-  document.getElementById("total").textContent = "0.00";
-  productSelect.innerHTML = '<option value="">请选择分类</option>';
+
+  // ✅ 提交成功后跳转至支付页面
+  window.location.href = "pay.html";
 });
