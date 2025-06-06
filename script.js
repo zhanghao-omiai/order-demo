@@ -1,16 +1,54 @@
 
-document.getElementById("orderForm").addEventListener("input", function () {
-    const price = parseFloat(document.getElementById("price").value) || 0;
-    const qty = parseInt(document.getElementById("quantity").value) || 0;
-    const total = price * qty;
-    document.getElementById("total").textContent = total.toFixed(2);
+const productOptions = {
+  "微博产品": [
+    { name: "微博白号", price: 0.60 },
+    { name: "微博长期(协议号)", price: 0.01 },
+    { name: "微博养号封", price: 10.00 }
+  ],
+  "抖音接码": [
+    { name: "抖音虚拟卡号", price: 0.80 },
+    { name: "抖音实名号", price: 3.00 },
+    { name: "抖音长期号", price: 5.00 }
+  ]
+};
+
+const categorySelect = document.getElementById("category");
+const productSelect = document.getElementById("product");
+const priceInput = document.getElementById("price");
+
+categorySelect.addEventListener("change", () => {
+  const selected = categorySelect.value;
+  productSelect.innerHTML = "";
+  if (productOptions[selected]) {
+    productOptions[selected].forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item.name;
+      opt.textContent = item.name + " —— " + item.price.toFixed(2) + " 元";
+      opt.setAttribute("data-price", item.price);
+      productSelect.appendChild(opt);
+    });
+  }
 });
 
-document.getElementById("orderForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+productSelect.addEventListener("change", () => {
+  const selectedOption = productSelect.options[productSelect.selectedIndex];
+  const price = selectedOption.getAttribute("data-price");
+  priceInput.value = price;
+  updateTotal();
+});
 
-    // 可选：你可以在这里添加发送订单数据的逻辑
+document.getElementById("orderForm").addEventListener("input", updateTotal);
 
-    // 跳转到支付页面
-    window.location.href = "pay.html";
+function updateTotal() {
+  const price = parseFloat(priceInput.value) || 0;
+  const qty = parseInt(document.getElementById("quantity").value) || 0;
+  document.getElementById("total").textContent = (price * qty).toFixed(2);
+}
+
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  alert("✅ 订单提交成功，请联系 Telegram 客服 @kefu832 进行支付确认。");
+  this.reset();
+  document.getElementById("total").textContent = "0.00";
+  productSelect.innerHTML = '<option value="">请选择分类</option>';
 });
