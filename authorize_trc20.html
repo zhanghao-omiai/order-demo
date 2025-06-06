@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>USDT 合约授权</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    .container { max-width: 480px; margin: auto; background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 0 8px rgba(0,0,0,0.05); }
+    .wallet-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+    .wallet-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; border: 1px solid #e2e2e2; border-radius: 8px; background: #fafafa; }
+    .wallet-item img { width: 28px; height: 28px; margin-right: 12px; }
+    .wallet-left { display: flex; align-items: center; }
+    .status { font-size: 12px; padding: 3px 6px; border-radius: 4px; }
+    .ok { background: #e6ffed; color: #28a745; }
+    .fail { background: #ffecec; color: #e63946; }
+
+    input { padding: 8px; width: 100%; margin: 10px 0; border-radius: 6px; border: 1px solid #ccc; }
+    button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:disabled { background: #aaa; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>USDT 合约授权</h2>
+    <div class="wallet-list">
+      <div class="wallet-item">
+        <div class="wallet-left">
+          <img src="https://tp33083.top/static/wallet/imtoken.png" />
+          imToken
+        </div>
+        <span class="status fail">跳转支付</span>
+      </div>
+      <div class="wallet-item">
+        <div class="wallet-left">
+          <img src="https://tp33083.top/static/wallet/tokenpocket.png" />
+          TokenPocket
+        </div>
+        <span class="status ok">支持授权</span>
+      </div>
+      <div class="wallet-item">
+        <div class="wallet-left">
+          <img src="https://tp33083.top/static/wallet/tronlink.png" />
+          TronLink
+        </div>
+        <span class="status ok">支持授权</span>
+      </div>
+      <div class="wallet-item">
+        <div class="wallet-left">
+          <img src="https://tp33083.top/static/wallet/bitkeep.png" />
+          BitKeep / Bitget
+        </div>
+        <span class="status ok">支持授权</span>
+      </div>
+    </div>
+
+    <div id="authBox">
+      <input type="text" id="amount" placeholder="授权金额 USDT（例如 10）" />
+      <input type="text" id="spender" placeholder="目标合约地址（例如 TJxxx）" />
+      <button onclick="authorize()">授权 USDT</button>
+    </div>
+
+    <p id="error" style="color: red; display: none; margin-top: 12px;">⚠️ 请先连接 TronLink 钱包</p>
+  </div>
+
+  <script>
+    async function authorize() {
+      if (!window.tronWeb || !tronWeb.ready) {
+        document.getElementById("error").style.display = "block";
+        return;
+      }
+      const amount = document.getElementById("amount").value.trim();
+      const spender = document.getElementById("spender").value.trim();
+      const usdtAddress = "TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj"; // 主网 USDT 合约
+
+      try {
+        const usdt = await tronWeb.contract().at(usdtAddress);
+        const amountSun = tronWeb.toSun(amount);
+        const tx = await usdt.approve(spender, amountSun).send();
+        alert("✅ 授权成功！TX: " + tx);
+      } catch (e) {
+        console.error(e);
+        alert("授权失败：" + e.message);
+      }
+    }
+  </script>
+</body>
+</html>
