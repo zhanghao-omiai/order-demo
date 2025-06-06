@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>企业小店下单平台</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="https://img.icons8.com/color/96/shop.png" alt="企业Logo" style="display:block;margin:0 auto 15px auto;">
+        <h1 style="text-align: center; font-size: 24px;">企业小店下单平台</h1>
+        <p style="text-align: center; margin: 8px 0 20px 0;">
+            💬 联系客服 Telegram：<a href="https://t.me/kefu832" target="_blank" style="color:#007BFF;font-weight:bold;">@kefu832</a>
+        </p>
+
+        <form id="orderForm">
+            <label for="category">商品分类：</label>
+            <select id="category" name="category">
+                <option value="虚拟物品">虚拟物品</option>
+                <option value="服务类">服务类</option>
+                <option value="数字资源">数字资源</option>
+            </select>
+
+            <label for="product">商品名称：</label>
+            <input type="text" id="product" name="product" placeholder="如：高级会员账号">
+
+            <label for="price">单价（元）：</label>
+            <input type="number" id="price" name="price" value="10">
+
+            <label for="quantity">数量：</label>
+            <input type="number" id="quantity" name="quantity" value="1">
+
+            <label for="gender">性别：</label>
+            <select id="gender" name="gender">
+                <option value="不限">不限</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+
+            <label for="email">接收邮箱：</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com">
+
+            <p class="total">总价：<span id="total">10.00</span> 元</p>
+            <button type="submit">提交订单</button>
+        </form>
+
+        <div style="margin-top: 30px; background: #fffbe6; padding: 12px; border: 1px solid #ffe58f; border-radius: 6px;">
+            <strong>⚠️ 支付说明：</strong><br>
+            当前仅支持 USDT 支付，请填写订单后联系客服完成支付流程。
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
