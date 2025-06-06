@@ -12,7 +12,7 @@
             padding: 40px;
         }
         .container {
-            max-width: 480px;
+            max-width: 500px;
             margin: auto;
             background: white;
             border-radius: 10px;
@@ -27,8 +27,16 @@
             border-radius: 6px;
         }
         .qr-block h3 {
-            margin-top: 10px;
-            font-size: 18px;
+            margin: 10px 0 5px 0;
+            font-size: 16px;
+        }
+        .address-box {
+            background: #f8f8f8;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            margin: 10px auto;
+            font-family: monospace;
+            user-select: all;
         }
         .pay-note {
             margin-top: 20px;
@@ -37,35 +45,84 @@
             border: 1px solid #ffe58f;
             border-radius: 6px;
         }
-        a.btn {
+        .btn, .copy-btn {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 15px;
             background: #007BFF;
             color: white;
             text-decoration: none;
             padding: 10px 16px;
             border-radius: 6px;
+            cursor: pointer;
+            border: none;
         }
         .usdt-icon {
             width: 32px;
             vertical-align: middle;
             margin-right: 6px;
         }
+        .info-box {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+        #timer {
+            font-weight: bold;
+            color: #d9534f;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2><img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="usdt-icon" alt="USDT">USDT 支付</h2>
+
+        <div class="info-box">
+            🧾 订单编号：<span id="orderId">#</span><br>
+            ⏳ 支付剩余时间：<span id="timer">10:00</span>
+        </div>
+
         <p>请使用 USDT 转账以下地址完成支付：</p>
         <div class="qr-block">
             <img src="usdt_qr.png" alt="USDT收款二维码">
-            <h3>地址：TUrsZLBMztAVQf4uo8Gekcp2Fo88888888</h3>
+            <h3>地址：</h3>
+            <div class="address-box" id="usdtAddress">TUrsZLBMztAVQf4uo8Gekcp2Fo88888888</div>
+            <button class="copy-btn" onclick="copyAddress()">📋 复制地址</button>
         </div>
+
         <div class="pay-note">
             <strong>⚠️ 温馨提示：</strong><br>
-            请在提交订单金额后立即转账至上方地址，并截图发送给客服。
+            请在 10 分钟内完成支付，并截图发送给客服以避免超时。
         </div>
         <a class="btn" href="https://t.me/kefu832" target="_blank">💬 联系 Telegram 客服</a>
     </div>
+
+    <script>
+        function copyAddress() {
+            const text = document.getElementById("usdtAddress").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("USDT 地址已复制！");
+            });
+        }
+
+        // 倒计时功能
+        let seconds = 600;
+        const timerDisplay = document.getElementById("timer");
+        const countdown = setInterval(() => {
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                timerDisplay.textContent = "已超时，请重新下单";
+                timerDisplay.style.color = "gray";
+                return;
+            }
+            seconds--;
+            const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+            const s = String(seconds % 60).padStart(2, "0");
+            timerDisplay.textContent = `${m}:${s}`;
+        }, 1000);
+
+        // 模拟订单编号
+        const oid = "ORD" + Date.now().toString().slice(-6);
+        document.getElementById("orderId").textContent = oid;
+    </script>
 </body>
 </html>
