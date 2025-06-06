@@ -1,127 +1,59 @@
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <title>USDT 支付页面</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            padding: 40px;
-        }
-        .container {
-            max-width: 500px;
-            margin: auto;
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .qr-block img {
-            width: 140px;
-            height: 140px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-        }
-        .qr-block h3 {
-            margin: 10px 0 5px 0;
-            font-size: 16px;
-        }
-        .address-box {
-            background: #f8f8f8;
-            padding: 10px;
-            border: 1px dashed #ccc;
-            margin: 10px auto;
-            font-family: monospace;
-            user-select: all;
-        }
-        .pay-note {
-            margin-top: 20px;
-            background: #fffbe6;
-            padding: 12px;
-            border: 1px solid #ffe58f;
-            border-radius: 6px;
-        }
-        .btn, .copy-btn {
-            display: inline-block;
-            margin-top: 15px;
-            background: #007BFF;
-            color: white;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            border: none;
-        }
-        .usdt-icon {
-            width: 32px;
-            vertical-align: middle;
-            margin-right: 6px;
-            border-radius: 50%;
-        }
-        .info-box {
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #555;
-        }
-        #timer {
-            font-weight: bold;
-            color: #d9534f;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>USDT 支付页面</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f2f2f2; padding: 20px; }
+    .container { max-width: 520px; margin: auto; background: white; padding: 25px; border-radius: 10px; text-align: center; }
+    .qrcode img { width: 200px; height: 200px; }
+    .info { margin: 15px 0; font-size: 16px; }
+    .label { font-weight: bold; margin-top: 15px; display: block; }
+    .copy-btn { padding: 6px 14px; font-size: 14px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    #timer { color: #ff5722; font-weight: bold; margin-top: 10px; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2><img src="usdt_avatar.png" class="usdt-icon" alt="USDT">USDT 支付</h2>
-
-        <div class="info-box">
-            🧾 订单编号：<span id="orderId">#</span><br>
-            ⏳ 支付剩余时间：<span id="timer">10:00</span>
-        </div>
-
-        <p>请使用 USDT 转账以下地址完成支付：</p>
-        <div class="qr-block">
-            <img src="usdt_qr.png" alt="USDT收款二维码">
-            <h3>地址：</h3>
-            <div class="address-box" id="usdtAddress">TUrsZLBMztAVQf4uo8Gekcp2Fo88888888</div>
-            <button class="copy-btn" onclick="copyAddress()">📋 复制地址</button>
-        </div>
-
-        <div class="pay-note">
-            <strong>⚠️ 温馨提示：</strong><br>
-            请在 10 分钟内完成支付，并截图发送给客服以避免超时。
-        </div>
-        <a class="btn" href="https://t.me/kefu832" target="_blank">💬 联系 Telegram 客服</a>
+  <div class="container">
+    <h2>请支付 USDT</h2>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACeElEQVR4nO2bTW7bMBBG35QCspRukKNINzNyM+koOUABalmAwtcFSUdOG6RBZdYqhgtDIN/iAwacX9rEV9by7Us4OO+8884777zzH/FWVgewmdkANrEZrPVsaqjH+YP5UZIUwWwIkl7NWAawiSBJ0i1/bz3OH8yv5YZqzvc3iPG1y2f1YrfU4/wxfPfLzvokg80EqRNrWz3O35e3CWCM4YO6+NH1O/97vpc0U/wzy3PK2zYBklJrPc4fyi9mJWu+xBJ6bVqfRE6nzaytHucP4tG7NQOaCcp3+v3po+l3/k94m9Yu/0CfsEvcjDFuOae2XAk31OP8UXzOn5UDbp8AgizvDXH/Nc4t9Dh/LF/9c02YJSU096r+OQZp7lNpgbh/Phlf7Dv3EqMSjPHNyNWqktv3pPyuv6HF4KahEWSL1a82epy/G28XJViGoNKfjACEnFO31+P8AXz2z8Urx9twXHsexXG7fz4hX+NvHhOlbOR8kItgbkpkt+8p+eKar2Oi4prJnWibVp//npQv9S/rgOi/dwYhGYTEGAerp6E2oB9Nv/OfrBp/Q4m647X+LUOkmml5/D0jf42/AP0106r1r+ZeNTC7fU/I7/PnGa65cmJXFfn9PS3/fn5ELnhra5JR2k+S3L6n5N/eT2ruf5hdXjusvJ/seJskPap+5z/hc5s5Up7mLMNmetnNlFrrcf5gvla4eQic69/1SSxmlr/a6nH+PnzOqpZhXxWBz/f/F96semWb2Ewvw2bZ3P9Gj/N/x9eOZC9gBcHWAVun5Tl1NsYNxnkztdHj/LE8tSoCcq+qtjtq/evvN87Mm/+/23nnnXfeeeeb8z8BpJ3ZzhYyuCEAAAAASUVORK5CYII=" alt="USDT 地址二维码">
     </div>
+    <div class="info">
+      <span class="label">收款地址：</span>
+      <input type="text" id="address" value="TUrsZLBMztAVQf4uo8Gekcp2Fo88888888" readonly style="width:100%;padding:8px;margin:5px 0;">
+      <button class="copy-btn" onclick="copyAddress()">复制地址</button>
+    </div>
+    <div class="info">
+      <span class="label">支付金额：</span>
+      <input type="text" value="10.00 USDT" readonly style="width:100%;padding:8px;margin:5px 0;">
+    </div>
+    <p id="timer">请在 10:00 内完成支付</p>
+  </div>
 
-    <script>
-        function copyAddress() {
-            const text = document.getElementById("usdtAddress").innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("USDT 地址已复制！");
-            });
-        }
+  <script>
+    function copyAddress() {
+      const addr = document.getElementById("address");
+      addr.select();
+      document.execCommand("copy");
+      alert("地址已复制！");
+    }
 
-        let seconds = 600;
-        const timerDisplay = document.getElementById("timer");
-        const countdown = setInterval(() => {
-            if (seconds <= 0) {
-                clearInterval(countdown);
-                timerDisplay.textContent = "已超时，请重新下单";
-                timerDisplay.style.color = "gray";
-                return;
-            }
-            seconds--;
-            const m = String(Math.floor(seconds / 60)).padStart(2, "0");
-            const s = String(seconds % 60).padStart(2, "0");
-            timerDisplay.textContent = `${m}:${s}`;
-        }, 1000);
-
-        const oid = "ORD" + Date.now().toString().slice(-6);
-        document.getElementById("orderId").textContent = oid;
-    </script>
+    let time = 600;
+    const timerElement = document.getElementById("timer");
+    const countdown = setInterval(() => {
+      time--;
+      const minutes = String(Math.floor(time / 60)).padStart(2, '0');
+      const seconds = String(time % 60).padStart(2, '0');
+      timerElement.textContent = "请在 " + minutes + ":" + seconds + " 内完成支付";
+      if (time <= 0) {
+        clearInterval(countdown);
+        timerElement.textContent = "订单已超时，请重新下单";
+        timerElement.style.color = "gray";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
