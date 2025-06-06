@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TRC20 USDT 授权</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
+    .container { max-width: 520px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    input { padding: 10px; width: 100%; font-size: 16px; margin-top: 10px; box-sizing: border-box; }
+    label { margin-top: 20px; display: block; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style="text-align:center;">TRC20 USDT 合约授权</h2>
+    <p>请连接 TronLink 钱包，授权合约地址可操作您的 USDT</p>
+
+    <label>授权金额 (USDT)：</label>
+    <input type="number" id="amount" placeholder="例如 10.00">
+
+    <label>目标合约地址：</label>
+    <input type="text" id="spender" value="TYuXX...你的合约地址">
+
+    <button onclick="authorize()">🛡️ 授权 USDT</button>
+    <p id="status" style="margin-top:15px;color:#444;"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tronweb/dist/TronWeb.min.js"></script>
+  <script>
+    const USDT_CONTRACT = "TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj"; // TRON 主网 USDT 合约地址
+    const DECIMALS = 6;
+
+    async function authorize() {
+      const amount = document.getElementById("amount").value;
+      const spender = document.getElementById("spender").value;
+      const status = document.getElementById("status");
+
+      if (!window.tronWeb || !tronWeb.defaultAddress.base58) {
+        status.innerText = "❌ 请先安装并登录 TronLink 钱包";
+        return;
+      }
+
+      const from = tronWeb.defaultAddress.base58;
+      const contract = await tronWeb.contract().at(USDT_CONTRACT);
+      const parsedAmount = tronWeb.toBigNumber(amount * Math.pow(10, DECIMALS));
+
+      try {
+        const tx = await contract.approve(spender, parsedAmount).send({ feeLimit: 10000000 });
+        status.innerText = "✅ 授权成功，交易哈希：" + tx;
+      } catch (err) {
+        console.error(err);
+        status.innerText = "❌ 授权失败：" + (err.message || err);
+      }
+    }
+  </script>
+</body>
+</html>
