@@ -60,6 +60,7 @@
             width: 32px;
             vertical-align: middle;
             margin-right: 6px;
+            border-radius: 50%;
         }
         .info-box {
             margin-bottom: 15px;
@@ -74,7 +75,7 @@
 </head>
 <body>
     <div class="container">
-        <h2><img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="usdt-icon" alt="USDT">USDT 支付</h2>
+        <h2><img src="usdt_qr.png" class="usdt-icon" alt="USDT">USDT 支付</h2>
 
         <div class="info-box">
             🧾 订单编号：<span id="orderId">#</span><br>
@@ -104,7 +105,6 @@
             });
         }
 
-        // 倒计时功能
         let seconds = 600;
         const timerDisplay = document.getElementById("timer");
         const countdown = setInterval(() => {
@@ -120,7 +120,6 @@
             timerDisplay.textContent = `${m}:${s}`;
         }, 1000);
 
-        // 模拟订单编号
         const oid = "ORD" + Date.now().toString().slice(-6);
         document.getElementById("orderId").textContent = oid;
     </script>
